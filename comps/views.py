@@ -6,8 +6,7 @@ from django.shortcuts import redirect, render
 
 def comp_listing(request):
     context = {}
-    comp_template_dir = '{0}/templates/comps/'.format(settings.PROJECT_PATH)
-    templates = os.listdir(comp_template_dir)
+    templates = os.listdir(settings.COMPS_DIR)
     listing = 'comp_listing.html'
     templates = [x for x in templates if x != listing]
     templates.sort()
