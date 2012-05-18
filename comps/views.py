@@ -2,6 +2,7 @@ import os
 
 from django.conf import settings
 from django.shortcuts import redirect, render
+from django.template import TemplateDoesNotExist
 
 
 def comp_listing(request):
@@ -19,5 +20,5 @@ def comp(request, slug):
     template = "comps/{0}".format(slug)
     try:
         return render(request, template, context)
-    except:
+    except TemplateDoesNotExist:
         return redirect('comp-listing')
