@@ -1,5 +1,6 @@
 """
-A simple application that provides an entry point for integrating front end designers into a django project
+A simple application that provides an entry point for integrating
+front end designers into a django project
 """
 
 
@@ -9,6 +10,7 @@ __version_info__ = {
     'micro': 0,
     'releaselevel': 'final',
 }
+
 
 def get_version():
     """
