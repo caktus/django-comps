@@ -1,13 +1,12 @@
 {% extends "base.html" %}
 {% load url from future %}
 
-{% block title %}Comp listing{% endblock %}
-
-{% block content %}
-<h1>This is a listing of all available pages</h1>
 <ul>
 {% for template in templates %}
-    <li><a href="{% url 'comp' template %}">{{ template }}</a></li>
+    {% if subdirectory %}
+        <li><a href="{% url 'comp' slug=template directory_slug=subdirectory %}">{{ template }}</a></li>
+    {% else %}
+        <li><a href="{% url 'comp' slug=template %}">{{ template }}</a></li>
+    {% endif %}
 {% endfor %}
 </ul>
-{% endblock %}
