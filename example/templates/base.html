@@ -1,0 +1,18 @@
+{% load url from future %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    <meta charset="utf-8">
+    <meta name="keywords" content="{% block meta-keywords %}{% endblock %}" />
+    <meta name="description" content="{% block meta-description %}{% endblock %}" />
+    {% block extra-meta %}{% endblock %}
+    {% block extra-css %}{% endblock %}
+</head>
+<body>
+    <div id="content">
+        {% block content %}{% endblock  %}
+    </div>
+    {% block extra-js %}{% endblock %}
+</body>
+</html>
