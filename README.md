@@ -12,14 +12,14 @@ Install
 
 Add ``comps`` to your ``INSTALLED_APPS``
 
-Configure the path to your ``COMPS_DIR``::
+Configure the path to your ``COMPS_DIR``
 
 ```
 #Designate the folder for comp/design work
 COMPS_DIR = '/path/to/project/templates/comps'
 ```
 
-Configure **urls.py**::
+Configure **urls.py**
 
 ```
 if 'comps' in settings.INSTALLED_APPS:
