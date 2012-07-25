@@ -10,21 +10,28 @@ def comp_listing(request, directory_slug=None):
     working_dir = settings.COMPS_DIR
     if directory_slug:
         working_dir = os.path.join(working_dir, directory_slug)
-    templates = os.listdir(working_dir)
-    listing = 'comp_listing.html'
-    templates = [x for x in templates if x != listing]
+    dirnames = []
+    templates = []
+    items = os.listdir(working_dir)
+    templates = [x for x in items if os.path.splitext(x)[1] == '.html']
+    dirnames = [x for x in items if \
+                    not os.path.isfile(os.path.join(working_dir, x))]
     templates.sort()
+    dirnames.sort()
+    context['directories'] = dirnames
     context['templates'] = templates
     context['subdirectory'] = directory_slug
-    return render(request, "comps/{0}".format(listing), context)
+    return render(request, "comps/comp_listing.html", context)
 
 
 def comp(request, slug, directory_slug=None):
     context = {}
-    template = "comps/{0}".format(slug)
+    path = settings.COMPS_DIR
+    comp_dir = os.path.split(path)[1]
+    template = "{0}/{1}".format(comp_dir, slug)
     if directory_slug:
-        template = "comps/{0}/{1}".format(directory_slug, slug)
-    working_dir = os.path.join(settings.COMPS_DIR, slug)
+        template = "{0}/{1}/{2}".format(comp_dir, directory_slug, slug)
+    working_dir = os.path.join(path, slug)
     if os.path.isdir(working_dir):
         return redirect('comp-listing', directory_slug=slug)
     try:

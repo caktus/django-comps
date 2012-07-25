@@ -1,12 +1,30 @@
 {% load url from future %}
 
 <h1>This is a listing of all pages and/or folders in this directory</h1>
-<ul>
-{% for template in templates %}
-    {% if subdirectory %}
-        <li><a href="{% url 'comp' slug=template directory_slug=subdirectory %}">{{ template }}</a></li>
-    {% else %}
-        <li><a href="{% url 'comp' slug=template %}">{{ template }}</a></li>
-    {% endif %}
-{% endfor %}
-</ul>
+{% if templates %}
+    <h3>HTML Templates</h3>
+    <ul>
+    {% for template in templates %}
+        {% if subdirectory %}
+            <li><a href="{% url 'comp' slug=template directory_slug=subdirectory %}">{{ template }}</a></li>
+        {% else %}
+            <li><a href="{% url 'comp' slug=template %}">{{ template }}</a></li>
+        {% endif %}
+    {% endfor %}
+    </ul>
+{% endif %}
+{% if directories %}
+    <h3>Subdirectories</h3>
+    <ul>
+    {% for directory in directories %}
+        {% if subdirectory %}
+            <li><a href="{% url 'comp' slug=directory directory_slug=subdirectory %}">{{ directory }}</a></li>
+        {% else %}
+            <li><a href="{% url 'comp' slug=directory %}">{{ directory }}</a></li>
+        {% endif %}
+    {% endfor %}
+    </ul>
+{% endif %}
+{% if subdirectory %}
+<a href="{% url 'comp-listing' %}">Back</a>
+{% endif %}
