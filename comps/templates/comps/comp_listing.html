@@ -1,9 +1,5 @@
-{% extends "base.html" %}
 {% load url from future %}
 
-{% block title %}Comp listing{% endblock %}
-{% block content %}
-       
 <h1>This is a listing of all pages and/or folders in this directory</h1>
 <ul>
 {% for template in templates %}
@@ -14,4 +10,3 @@
     {% endif %}
 {% endfor %}
 </ul>
-{% endblock %}
