@@ -8,16 +8,16 @@ Provides an entry point for deeper integration of naive-to-Django front end desi
 Install
 -------
 
-1. ``pip install django-comps``
-2. Add ``comps`` to your ``INSTALLED_APPS``
-3. Configure the path to your ``COMPS_DIR``::
+``pip install django-comps``
+Add ``comps`` to your ``INSTALLED_APPS``
+Configure the path to your ``COMPS_DIR``::
 
 ```
- Designate the folder for initial comp/design work
+#Designate the folder for comp/design work
 COMPS_DIR = '/path/to/project/templates/comps'
 ```
 
-4. Configure **urls.py**::
+Configure **urls.py**::
 
 ```
 if 'comps' in settings.INSTALLED_APPS:
