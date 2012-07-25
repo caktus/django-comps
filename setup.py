@@ -13,7 +13,7 @@ def read_file(filename):
 
 
 setup(
-    name='comps',
+    name='django-comps',
     version=__import__('comps').__version__,
     author='David Ray',
     author_email='davidray@gmail.com',
