@@ -9,7 +9,9 @@ Install
 -------
 
 ``pip install django-comps``
+
 Add ``comps`` to your ``INSTALLED_APPS``
+
 Configure the path to your ``COMPS_DIR``::
 
 ```
