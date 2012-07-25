@@ -30,8 +30,8 @@ setup(
         'Topic :: Software Development :: Libraries :: Python Modules',
         'Development Status :: 4 - Beta',
         'Operating System :: OS Independent',
-        'Framework :: Django',        
+        'Framework :: Django',
         'Environment :: Web Environment'
     ],
-    long_description=read_file('README.rst'),
+    long_description=read_file('README.mdt'),
 )
