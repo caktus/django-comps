@@ -33,5 +33,5 @@ setup(
         'Framework :: Django',
         'Environment :: Web Environment'
     ],
-    long_description=read_file('README.mdt'),
+    long_description=read_file('README.md'),
 )
