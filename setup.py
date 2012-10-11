@@ -23,14 +23,16 @@ setup(
     license='BSD',
     description=u' '.join(__import__('comps').__doc__.splitlines()).strip(),
     classifiers=[
-        'Topic :: Software Development :: Libraries :: Python Modules',
+        'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: BSD License',
         'Programming Language :: Python',
+        'Programming Language :: Python :: 2.6',
+        'Programming Language :: Python :: 2.7',
+        'Framework :: Django',
         'Topic :: Software Development :: Libraries :: Python Modules',
         'Development Status :: 4 - Beta',
         'Operating System :: OS Independent',
-        'Framework :: Django',
         'Environment :: Web Environment'
     ],
     long_description=read_file('README.md'),
