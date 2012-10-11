@@ -5,14 +5,16 @@ from django.test.client import Client
 from django.conf import settings
 
 
-
 class CompsViewsTestCase(unittest.TestCase):
-
 
     def setUp(self):
         self.client = Client()
+        #setup testing template path
         cwd = os.path.dirname(__file__)
-        settings.COMPS_DIR = os.path.join(cwd, 'templates/comps_test')
+        path_parts = cwd.split(os.sep)[:-1]
+        base_path = os.path.join(*path_parts)
+        settings.COMPS_DIR = os.path.join(os.sep, base_path,
+                                         'templates', 'comps_test')
 
     def test_comp_listing(self):
         """

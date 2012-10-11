@@ -34,4 +34,5 @@ setup(
         'Environment :: Web Environment'
     ],
     long_description=read_file('README.md'),
+    test_suite="runtests.runtests",
 )
