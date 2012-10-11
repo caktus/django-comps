@@ -6,3 +6,7 @@
 *.orig
 *.DS_Store
 .coverage
+.tox
+*.egg-info/*
+docs/_build/*
+dist/*
