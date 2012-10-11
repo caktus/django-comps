@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# django-scribbler documentation build configuration file, created by
+# django-comps documentation build configuration file, created by
 # sphinx-quickstart on Wed Jul 25 21:12:10 2012.
 #
 # This file is execfile()d with the current directory set to its containing dir.
@@ -164,7 +164,7 @@ html_static_path = ['_static']
 #html_file_suffix = None
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'django-scribblerdoc'
+htmlhelp_basename = 'django-compsdoc'
 
 
 # -- Options for LaTeX output --------------------------------------------------
