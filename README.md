@@ -27,18 +27,18 @@ Documentation
 -------------
 
 Documentation on using django-comps is available on
-`Read The Docs <http://readthedocs.org/docs/django-comps/>`_.
+[Read The Docs](http://readthedocs.org/docs/django-comps/).
 
 
 License
 --------------------------------------
 
 django-comps is released under the BSD License. See the
-`LICENSE <https://github.com/daaray/django-comps/blob/master/LICENSE>`_ file for more details.
+[LICENSE](https://github.com/daaray/django-comps/blob/master/LICENSE) file for more details.
 
 
 Contributing
 --------------------------------------
 
 If you think you've found a bug or are interested in contributing to this project
-check out `django-comps on Github <https://github.com/daaray/django-comps>`_.
+check out [django-comps on Github](https://github.com/daaray/django-comps>).
