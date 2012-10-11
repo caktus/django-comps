@@ -3,30 +3,10 @@ django-comps
 
 An app that facilitates rapid prototyping.
 
-Provides an entry point for deeper integration of naive-to-Django front end designers into a project.
+Provides an entry point for deeper integration of front end designers with
+little to no experienceinto a project.
 
-Install
--------
-
-``pip install django-comps``
-
-Add ``comps`` to your ``INSTALLED_APPS``
-
-Configure the path to your ``COMPS_DIR``
-
-```
-#Designate the folder for comp/design work
-COMPS_DIR = '/path/to/project/templates/comps'
-```
-
-Configure **urls.py**
-
-```
-if 'comps' in settings.INSTALLED_APPS:
-    urlpatterns += patterns('', url(r'^', include('comps.urls')))
-```
-
-Usage
+Features
 -------
 Protypes can be built in the ``COMPS-DIR`` and render within he context of
 a Django project, without the need for defined views.
@@ -35,9 +15,30 @@ a Django project, without the need for defined views.
 * No need to pre-configure urls and views during prototyping
 * Onboard new designers to the wonders of Django
 
-Plumbing
---------
+Installation
+------------
 
-* ``/comps`` renders a list of ** *.html ** files and directories located within the ``COMPS_DIR``
-* ``/comp/*.html`` renders the template in question.
+django-comps requires Django >= 1.3 and Python >= 2.6.
 
+``pip install django-comps``
+
+
+Documentation
+-------------
+
+Documentation on using django-comps is available on
+`Read The Docs <http://readthedocs.org/docs/django-comps/>`_.
+
+
+License
+--------------------------------------
+
+django-comps is released under the BSD License. See the
+`LICENSE <https://github.com/daaray/django-comps/blob/master/LICENSE>`_ file for more details.
+
+
+Contributing
+--------------------------------------
+
+If you think you've found a bug or are interested in contributing to this project
+check out `django-comps on Github <https://github.com/daaray/django-comps>`_.
