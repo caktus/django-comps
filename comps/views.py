@@ -97,7 +97,7 @@ def export_comps(request):
         for filename in filenames:
             full_path = os.path.join(dirname, filename)
             rel_path = os.path.relpath(full_path, comps)
-            template_path = os.path.join('comps', rel_path)
+            template_path = os.path.join(comps.split('/')[-1], rel_path)
             html = render_to_string(template_path, context)
             # convert static and media refs to relative links
             for directory in ['/static', '/media']:

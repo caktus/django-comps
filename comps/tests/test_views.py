@@ -1,8 +1,11 @@
+import StringIO
 import os
-from django.utils import unittest
+import zipfile
+
+from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.test.client import Client
-from django.conf import settings
+from django.utils import unittest
 
 
 class CompsViewsTestCase(unittest.TestCase):
@@ -50,3 +53,16 @@ class CompsViewsTestCase(unittest.TestCase):
         """
         response = self.client.get(reverse('comp', args=['nothing']))
         self.assertEqual(response.status_code, 302)
+
+    def test_zip_export(self):
+        """
+        Ensure all of the templates were exported
+        """
+        files = ['foo.html', 'bar.html', 'subdirectory/foo.html']
+        response = self.client.get(reverse('export-comps'))
+        self.assertEqual(response.status_code, 200)
+        zf = zipfile.ZipFile(StringIO.StringIO(response.content))
+        zf_filenames = [x.filename for x in zf.filelist]
+        self.assertEqual(len(zf_filenames), len(files))
+        matches = set(zf_filenames) & set(files)
+        self.assertEqual(len(matches), 3)
