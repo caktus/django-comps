@@ -37,4 +37,7 @@ setup(
     ],
     long_description=read_file('README.md'),
     test_suite="runtests.runtests",
+    install_requires=['beautifulsoup4>=4.1.3',
+                      'html5lib>=0.95',
+                     ]
 )

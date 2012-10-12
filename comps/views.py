@@ -1,5 +1,7 @@
+import itertools
 import os
 
+from bs4 import BeautifulSoup
 from StringIO import StringIO
 from zipfile import ZipFile
 
@@ -85,13 +87,13 @@ def export_comps(request):
             path = os.path.join('static', rel_path)
             zip.writestr(path, content)
 
-    for dirname, dirs, filenames in os.walk(media):
-        for filename in filenames:
-            full_path = os.path.join(dirname, filename)
-            rel_path = os.path.relpath(full_path, media)
-            content = open(full_path, 'rb').read()
-            path = os.path.join('media', rel_path)
-            zip.writestr(path, content)
+#    for dirname, dirs, filenames in os.walk(media):
+#        for filename in filenames:
+#            full_path = os.path.join(dirname, filename)
+#            rel_path = os.path.relpath(full_path, media)
+#            content = open(full_path, 'rb').read()
+#            path = os.path.join('media', rel_path)
+#            zip.writestr(path, content)
 
     for dirname, dirs, filenames in os.walk(comps):
         for filename in filenames:
@@ -111,6 +113,42 @@ def export_comps(request):
                         dotted_rel += '../'
                         i += 1
                 new_rel_path = '{0}{1}'.format(dotted_rel, directory)
+
+                soup = BeautifulSoup(html)
+                resources = []
+
+                mapper = {
+                    'img': ['src', 'data-svg-src', 'data-png-src'],
+                    'link': ['href'],
+                    'script': ['src']
+                }
+
+                for ele, attrs in mapper.items():
+                    eles = soup.findAll(ele)
+                    for attr in attrs:
+                        resources.append([x.get(attr) for x in eles])
+                resources = set(filter(None,
+                                itertools.chain.from_iterable(resources)))
+
+#                for resource in resources:
+#                    # toss each one into the zip file
+#                    resource_name = os.path.basename(resource)
+#                    resource_path = static
+#                    resource_rel_path_parts = resource.split('/')
+#                    for part in resource_rel_path_parts:
+#                        if 'static' != part:
+#                            resource_path += '/{0}'.format(part)
+#                    rel_path = os.path.relpath(resource_path, static)
+#                    content = open(resource_path, 'rb').read()
+#                    ext = os.path.splitext(resource_name)[1]
+#                    if ext == '.css':
+#                        # convert static refs to relative links
+#                        dotted_rel = os.path.relpath('/static', full_path)
+#                        new_rel_path = '{0}{1}'.format(dotted_rel, '/static')
+#                        content = content.replace('/static', new_rel_path)
+#                    path = os.path.join('static', rel_path)
+#                    zip.writestr(path, content)
+
                 html = html.replace(directory, new_rel_path)
             zip.writestr(rel_path, unicode(html).encode("utf8"))
 
