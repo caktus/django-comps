@@ -50,5 +50,5 @@ Protypes can be built in the COMPS-DIR and render within he context of a Django 
 Plumbing
 ------------------------------------
 
-  * /comps renders a list of files with **.html** extensions and **directories** located within the COMPS_DIR
-  * /comp/*.html renders the template
+  * **/comps** renders a list of files with **.html** extensions and **directories** located within the COMPS_DIR
+  * **/comp/*.html** renders the template
