@@ -7,4 +7,7 @@ urlpatterns = patterns('comps.views',
     url(r'^comps(?:/(?P<directory_slug>[\w\-]+))?/(?P<slug>[\w.\-]+)$',
         'comp',
         name='comp'),
+    url(r'^export-comps/$',
+        'export_comps',
+        name='export-comps'),
 )
