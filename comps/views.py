@@ -85,13 +85,14 @@ def export_comps(request):
             path = os.path.join('static', rel_path)
             zip.writestr(path, content)
 
-    for dirname, dirs, filenames in os.walk(media):
-        for filename in filenames:
-            full_path = os.path.join(dirname, filename)
-            rel_path = os.path.relpath(full_path, media)
-            content = open(full_path, 'rb').read()
-            path = os.path.join('media', rel_path)
-            zip.writestr(path, content)
+# We should not need media files in this context
+#    for dirname, dirs, filenames in os.walk(media):
+#        for filename in filenames:
+#            full_path = os.path.join(dirname, filename)
+#            rel_path = os.path.relpath(full_path, media)
+#            content = open(full_path, 'rb').read()
+#            path = os.path.join('media', rel_path)
+#            zip.writestr(path, content)
 
     for dirname, dirs, filenames in os.walk(comps):
         for filename in filenames:

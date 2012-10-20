@@ -8,7 +8,7 @@ little to no experienceinto a project.
 
 Features
 -------
-Protypes can be built in the ``COMPS-DIR`` and render within he context of
+Protypes can be built in the ``COMPS_DIR`` and render within he context of
 a Django project, without the need for defined views.
 
 * Take advantage of the templating engine
