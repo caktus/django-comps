@@ -4,7 +4,7 @@ Release History
 Release and change history for django-comps
 
 
-v0.2.0 (Released TBD)
+v0.2.0 (Released 2012-10-20)
 ------------------------------------
 
 - Add management command to ouput rendered HTML and resources
