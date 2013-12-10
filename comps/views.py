@@ -6,9 +6,8 @@ from zipfile import ZipFile
 from django.conf import settings
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
-from django.template import TemplateDoesNotExist
-from django.template import RequestContext
-from django.template.loader import render_to_string
+from django.template import RequestContext, TemplateDoesNotExist
+from django.template.loader import get_template, render_to_string
 
 
 def comp_listing(request, directory_slug=None):
@@ -46,10 +45,14 @@ def comp(request, slug, directory_slug=None):
     working_dir = os.path.join(path, slug)
     if os.path.isdir(working_dir):
         return redirect('comp-listing', directory_slug=slug)
+
     try:
-        return render(request, template, context)
+        t = get_template(template)
     except TemplateDoesNotExist:
         return redirect('comp-listing')
+
+    c = RequestContext(request, context)
+    return HttpResponse(t.render(c))
 
 
 def export_comps(request):
