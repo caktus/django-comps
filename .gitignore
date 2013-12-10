@@ -5,6 +5,7 @@
 *.db
 *.orig
 *.DS_Store
+*.swp
 .coverage
 .tox
 *.egg-info/*
