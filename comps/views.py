@@ -1,6 +1,13 @@
+import sys
 import os
 
-from StringIO import StringIO
+try:
+    # Python 2
+    from StringIO import StringIO as StrBytesIO
+except ImportError: #pragma: no cover
+    # Python 3
+    from io import BytesIO as StrBytesIO
+
 from zipfile import ZipFile
 
 from django.conf import settings
@@ -8,6 +15,8 @@ from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.template import RequestContext, TemplateDoesNotExist
 from django.template.loader import get_template, render_to_string
+
+PY2 = sys.version_info[0] == 2
 
 
 def comp_listing(request, directory_slug=None):
@@ -59,16 +68,15 @@ def export_comps(request):
     """
     Returns a zipfile of the rendered HTML templates in the COMPS_DIR
     """
-    in_memory = StringIO()
+    in_memory = StrBytesIO()
     zip = ZipFile(in_memory, "a")
 
     comps = settings.COMPS_DIR
     static = settings.STATIC_ROOT
-    media = settings.MEDIA_ROOT
     context = RequestContext(request, {})
     context['debug'] = False
 
-    # dump static/mediaresources
+    # dump static resources
     # TODO: inspect each template and only pull in resources that are used
     for dirname, dirs, filenames in os.walk(static):
         for filename in filenames:
@@ -80,22 +88,12 @@ def export_comps(request):
             except IndexError:
                 pass
             if ext == '.css':
-                # convert static and media refs to relative links
-                for directory in ['/static', '/media']:
-                    dotted_rel = os.path.relpath(static, full_path)
-                    new_rel_path = '{0}{1}'.format(dotted_rel, directory)
-                    content = content.replace(directory, new_rel_path)
+                # convert static refs to relative links
+                dotted_rel = os.path.relpath(static, full_path)
+                new_rel_path = '{0}{1}'.format(dotted_rel, '/static')
+                content = content.replace('/static', new_rel_path)
             path = os.path.join('static', rel_path)
             zip.writestr(path, content)
-
-# We should not need media files in this context
-#    for dirname, dirs, filenames in os.walk(media):
-#        for filename in filenames:
-#            full_path = os.path.join(dirname, filename)
-#            rel_path = os.path.relpath(full_path, media)
-#            content = open(full_path, 'rb').read()
-#            path = os.path.join('media', rel_path)
-#            zip.writestr(path, content)
 
     for dirname, dirs, filenames in os.walk(comps):
         for filename in filenames:
@@ -103,26 +101,27 @@ def export_comps(request):
             rel_path = os.path.relpath(full_path, comps)
             template_path = os.path.join(comps.split('/')[-1], rel_path)
             html = render_to_string(template_path, context)
-            # convert static and media refs to relative links
-            for directory in ['/static', '/media']:
-                depth = len(rel_path.split(os.sep)) - 1
-                if depth == 0:
-                    dotted_rel = '.'
-                else:
-                    dotted_rel = ''
-                    i = 0
-                    while i < depth:
-                        dotted_rel += '../'
-                        i += 1
-                new_rel_path = '{0}{1}'.format(dotted_rel, directory)
-                html = html.replace(directory, new_rel_path)
-            zip.writestr(rel_path, unicode(html).encode("utf8"))
+            # convert static refs to relative links
+            depth = len(rel_path.split(os.sep)) - 1
+            if depth == 0:
+                dotted_rel = '.'
+            else:
+                dotted_rel = ''
+                i = 0
+                while i < depth:
+                    dotted_rel += '../'
+                    i += 1
+            new_rel_path = '{0}{1}'.format(dotted_rel, '/static')
+            html = html.replace('/static', new_rel_path)
+            if PY2:
+                html = unicode(html)
+            zip.writestr(rel_path, html.encode('utf8'))
 
     for item in zip.filelist:
         item.create_system = 0
     zip.close()
 
-    response = HttpResponse(mimetype="application/zip")
+    response = HttpResponse(content_type="application/zip")
     response["Content-Disposition"] = "attachment; filename=comps.zip"
     in_memory.seek(0)
     response.write(in_memory.read())
