@@ -1,12 +1,7 @@
 import sys
 import os
 
-try:
-    # Python 2
-    from StringIO import StringIO as StrBytesIO
-except ImportError: #pragma: no cover
-    # Python 3
-    from io import BytesIO as StrBytesIO
+from io import BytesIO
 
 from zipfile import ZipFile
 
@@ -68,7 +63,7 @@ def export_comps(request):
     """
     Returns a zipfile of the rendered HTML templates in the COMPS_DIR
     """
-    in_memory = StrBytesIO()
+    in_memory = BytesIO()
     zip = ZipFile(in_memory, "a")
 
     comps = settings.COMPS_DIR

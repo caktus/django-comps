@@ -1,10 +1,4 @@
-try:
-    # Python 2
-    from StringIO import StringIO as StrBytesIO
-except ImportError: #pragma: no cover
-    # Python 3
-    from io import BytesIO as StrBytesIO
-
+from io import BytesIO
 import os
 import zipfile
 
@@ -67,7 +61,7 @@ class CompsViewsTestCase(unittest.TestCase):
         files = ['foo.html', 'bar.html', 'subdirectory/foo.html']
         response = self.client.get(reverse('export-comps'))
         self.assertEqual(response.status_code, 200)
-        zf = zipfile.ZipFile(StrBytesIO(response.content))
+        zf = zipfile.ZipFile(BytesIO(response.content))
         zf_filenames = [x.filename for x in zf.filelist]
         self.assertEqual(len(zf_filenames), len(files))
         matches = set(zf_filenames) & set(files)
