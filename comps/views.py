@@ -86,7 +86,7 @@ def export_comps(request):
                 # convert static refs to relative links
                 dotted_rel = os.path.relpath(static, full_path)
                 new_rel_path = '{0}{1}'.format(dotted_rel, '/static')
-                content = content.replace('/static', new_rel_path)
+                content = content.replace(b'/static', bytes(new_rel_path, 'utf8'))
             path = os.path.join('static', rel_path)
             zip.writestr(path, content)
 
