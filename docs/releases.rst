@@ -3,6 +3,12 @@ Release History
 
 Release and change history for django-comps
 
+v0.3.0 (Released 2014-02-04)
+------------------------------------
+
+- Python 3 support, Django 1.4 - 1.6 support
+- Better exception handling for missing templates
+
 
 v0.2.0 (Released 2012-10-20)
 ------------------------------------
