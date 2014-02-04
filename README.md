@@ -18,7 +18,7 @@ a Django project, without the need for defined views.
 Installation
 ------------
 
-django-comps requires Django >= 1.3 and Python >= 2.6.
+django-comps requires Django >= 1.4 and Python >= 2.6.
 
 ``pip install django-comps``
 
