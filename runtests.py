@@ -41,4 +41,9 @@ def runtests():
 
 
 if __name__ == '__main__':
+    import django
+    try:
+        django.setup()
+    except:  # < Django 1.7
+        pass
     runtests()
