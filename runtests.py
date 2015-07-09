@@ -19,6 +19,10 @@ if not settings.configured:
             'django.contrib.sessions',
             'comps',
         ),
+        MIDDLEWARE_CLASSES=(
+            'django.middleware.common.CommonMiddleware',
+            'django.middleware.csrf.CsrfViewMiddleware',
+        ),
         SITE_ID=1,
         SECRET_KEY='super-secret',
         STATIC_ROOT=mkdtemp(prefix="test-django-comps-"),
