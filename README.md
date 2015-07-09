@@ -1,6 +1,11 @@
 django-comps
 ==========================
 
+[![Build Status][master-build-image]][travis-ci]
+
+[travis-ci]: https://travis-ci.org/caktus/django-comps/
+[master-build-image]: https://travis-ci.org/caktus/django-comps.svg?branch=master
+
 An app that facilitates rapid prototyping.
 
 Provides an entry point for deeper integration of front end designers with
