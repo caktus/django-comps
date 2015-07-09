@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 import sys
+from tempfile import mkdtemp
 
 from django.conf import settings
+
 
 if not settings.configured:
     settings.configure(
@@ -19,6 +21,7 @@ if not settings.configured:
         ),
         SITE_ID=1,
         SECRET_KEY='super-secret',
+        STATIC_ROOT=mkdtemp(prefix="test-django-comps-"),
         TEMPLATE_CONTEXT_PROCESSORS=(
             'django.contrib.auth.context_processors.auth',
             'django.core.context_processors.request',
