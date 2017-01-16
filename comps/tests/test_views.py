@@ -5,10 +5,10 @@ import zipfile
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.test.client import Client
-from django.utils import unittest
+from django.test import TestCase
 
 
-class CompsViewsTestCase(unittest.TestCase):
+class CompsViewsTestCase(TestCase):
 
     def setUp(self):
         self.client = Client()
@@ -44,7 +44,7 @@ class CompsViewsTestCase(unittest.TestCase):
         """
         Render the template
         """
-        response = self.client.get(reverse('comp', args=['foo.html']))
+        response = self.client.get(reverse('comp', args=['foo.html']), follow=True)
         self.assertEqual(response.status_code, 200)
 
     def test_comp_no_template(self):

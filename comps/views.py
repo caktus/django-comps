@@ -67,7 +67,7 @@ def export_comps(request):
     zip = ZipFile(in_memory, "a")
 
     comps = settings.COMPS_DIR
-    static = settings.STATIC_ROOT
+    static = settings.STATIC_ROOT or ""
     context = RequestContext(request, {})
     context['debug'] = False
 
