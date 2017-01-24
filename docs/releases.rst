@@ -3,6 +3,13 @@ Release History
 
 Release and change history for django-comps
 
+v1.0.0 (Released 2017-01-24)
+------------------------------------
+
+- Python 3.5 support, Django 1.7 - 1.10 support
+- Drop Python 2.6, Django 1.4-1.6
+
+
 v0.3.0 (Released 2014-02-04)
 ------------------------------------
 
@@ -22,4 +29,3 @@ v0.1.0 (Released 2012-07-25)
 ------------------------------------
 
 - Initial public release.
-
