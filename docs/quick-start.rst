@@ -34,7 +34,9 @@ You should include the comps urls in your root url patterns.
 .. code-block:: python
 
     if 'comps' in settings.INSTALLED_APPS:
-        urlpatterns += patterns('', url(r'^', include('comps.urls')))
+        urlpatterns += [
+            url(r'^', include('comps.urls'))
+        ]
 
 That should be enough to get you up and running with django-comps.
 

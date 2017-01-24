@@ -1,18 +1,14 @@
-try:
-    # Django 1.4+
-    from django.conf.urls import patterns, url
-except ImportError: # pragma: no cover
-    # Django 1.3
-    from django.conf.urls.defaults import patterns, url
+from django.conf.urls import url
+from comps import views
 
-urlpatterns = patterns('comps.views',
+urlpatterns = [
     url(r'^comps(?:/(?P<directory_slug>[\w\-]+))?/$',
-        'comp_listing',
+        views.comp_listing,
         name='comp-listing'),
     url(r'^comps(?:/(?P<directory_slug>[\w\-]+))?/(?P<slug>[\w.\-]+)$',
-        'comp',
+        views.comp,
         name='comp'),
     url(r'^export-comps/$',
-        'export_comps',
+        views.export_comps,
         name='export-comps'),
-)
+]

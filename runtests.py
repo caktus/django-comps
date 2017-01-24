@@ -2,6 +2,8 @@
 import sys
 
 from django.conf import settings
+from django import setup
+
 
 if not settings.configured:
     settings.configure(
@@ -19,10 +21,18 @@ if not settings.configured:
         ),
         SITE_ID=1,
         SECRET_KEY='super-secret',
-        TEMPLATE_CONTEXT_PROCESSORS=(
-            'django.contrib.auth.context_processors.auth',
-            'django.core.context_processors.request',
-        ),
+        TEMPLATES=[
+            {
+                'BACKEND': 'django.template.backends.django.DjangoTemplates',
+                'APP_DIRS': True,
+                'OPTIONS': {
+                    'context_processors': (
+                        'django.contrib.auth.context_processors.auth',
+                        'django.template.context_processors.request',
+                    ),
+                }
+            },
+        ],
         ROOT_URLCONF='comps.tests.urls',
         PASSWORD_HASHERS=(
             'django.contrib.auth.hashers.MD5PasswordHasher',
@@ -34,6 +44,7 @@ from django.test.utils import get_runner
 
 
 def runtests():
+    setup()
     TestRunner = get_runner(settings)
     test_runner = TestRunner(verbosity=1, interactive=True, failfast=False)
     failures = test_runner.run_tests(['comps', ])
