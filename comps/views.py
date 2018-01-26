@@ -51,12 +51,11 @@ def comp(request, slug, directory_slug=None):
         return redirect('comp-listing', directory_slug=slug)
 
     try:
-        t = get_template(template)
+        get_template(template)
     except TemplateDoesNotExist:
         return redirect('comp-listing')
 
-    c = RequestContext(request, context)
-    return HttpResponse(t.render(c))
+    return render(request, template, context)
 
 
 def export_comps(request):
